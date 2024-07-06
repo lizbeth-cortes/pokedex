@@ -1,11 +1,23 @@
 let listaPokemon = document.getElementById('listaPokemon');
 let botonesTipo = document.querySelectorAll('.btn-header');
+let contenedorSpinner = document.getElementById('contenedor-spinner');
+let contenedorCards = document.getElementById('todos');
+let isBuscarUnPokemon = false;
 let URL = "https://pokeapi.co/api/v2/pokemon/";
 
-let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-let tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-    return new bootstrap.Tooltip(tooltipTriggerEl)
-})
+ocultarCarga();
+
+function mostrarCarga() {
+    contenedorSpinner.style.display = 'flex';
+    contenedorCards.style.display = 'none';
+}
+
+function ocultarCarga() {
+    contenedorCards.style.display = 'flex';
+    contenedorSpinner.style.display = 'none';
+}
+
+
 
 async function obtenerPokemon() {
     let pokemonData = [];
@@ -62,33 +74,59 @@ function mostrarPokemon(pokemon) {
     }
 
     let div = document.createElement("div");
-    div.classList.add("contenedor-card", "col-12", "col-sm-6", "col-md-4", "col-lg-3");
-    div.innerHTML = `
-        <div class="card">
-            <a href="#" class="">
-                <div class="pokemon-image">
-                    <img src="${pokemon.sprites.other["official-artwork"].front_default}" class="img-fluid" alt="${pokemon.name}">
-                </div>
-                <div class="card-body">
-                    <div class="pokemon-info">
-                        <div class="nombre-contenedor">
-                            <p class="pokemon-id">#${pokemonId}</p>
-                            <h2 class="pokemon-nombre">${pokemon.name}</h2>
-                        </div>
-                        <div class="pokemon-tipos">
-                            ${tipos}
+    if (isBuscarUnPokemon) {
+        div.classList.add("contenedor-card", "col-12");
+        div.innerHTML = `
+            <div class="card">
+                <a href="#" class="">
+                    <div class="pokemon-image">
+                        <img src="${pokemon.sprites.other["official-artwork"].front_default}" class="" alt="${pokemon.name}">
+                    </div>
+                    <div class="card-body">
+                        <div class="pokemon-info">
+                            <div class="nombre-contenedor">
+                                <p class="pokemon-id">#${pokemonId}</p>
+                                <h2 class="pokemon-nombre">${pokemon.name}</h2>
+                            </div>
+                            <div class="pokemon-tipos">
+                                ${tipos}
+                            </div>
                         </div>
                     </div>
-                </div>
-            </a>
-        </div>
-    `;
+                </a>
+            </div>
+        `;
+        
+    } else {
+        div.classList.add("contenedor-card", "col-12", "col-sm-6", "col-md-4", "col-lg-3");
+        div.innerHTML = `
+            <div class="card">
+                <a href="#" class="">
+                    <div class="pokemon-image">
+                        <img src="${pokemon.sprites.other["official-artwork"].front_default}" class="img-fluid" alt="${pokemon.name}">
+                    </div>
+                    <div class="card-body">
+                        <div class="pokemon-info">
+                            <div class="nombre-contenedor">
+                                <p class="pokemon-id">#${pokemonId}</p>
+                                <h2 class="pokemon-nombre">${pokemon.name}</h2>
+                            </div>
+                            <div class="pokemon-tipos">
+                                ${tipos}
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        `;
+    }
 
     listaPokemon.append(div);
 }
 
 botonesTipo.forEach(boton => {
     boton.addEventListener("click", (event) => {
+        mostrarCarga();
         let botonId = event.currentTarget.id;
         listaPokemon.innerHTML = "";
 
@@ -97,11 +135,17 @@ botonesTipo.forEach(boton => {
                 pokemones.forEach(pokemon => {
                     let tipos = pokemon.types.map(tipo => tipo.type.name);
                     if (botonId === "ver-todos") {
+                        setTimeout(() => {
+                            ocultarCarga();
                         mostrarPokemon(pokemon);
+                        }, 1000); 
                     } else {
                         if (tipos.some(tipo => tipo.includes(botonId))) {
-                            mostrarPokemon(pokemon);
-                            // console.log(inputPokemon);
+                            setTimeout(() => {
+                                ocultarCarga();
+                                mostrarPokemon(pokemon);
+                            },1000);
+                            
                         }
                     }
                 });
@@ -111,29 +155,34 @@ botonesTipo.forEach(boton => {
 });
 
 function buscarPokemon() {
+    mostrarCarga();
+    isBuscarUnPokemon = true;
     listaPokemon.innerHTML = "";
     let inputPokemon = document.getElementById('buscadorPokemon').value.trim().toLowerCase();
-    
     if (inputPokemon) {
-        fetch(`${URL}${inputPokemon}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Pokémon no encontrado');
-                    
-                }
-                return response.json();
-            })
-            .then(pokemon => {
-                mostrarPokemon(pokemon);
-            })
-            .catch(error => {
-                console.error('Error al buscar el Pokémon:', error);
-                const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
-                errorModal.show();
-                
-            });
+        setTimeout(() => {
+            fetch(`${URL}${inputPokemon}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Pokémon no encontrado');
+                    }
+                    return response.json();
+                })
+                .then(pokemon => {
+                    ocultarCarga();
+                    mostrarPokemon(pokemon);
+                })
+                .catch(error => {
+                    ocultarCarga();
+                    console.error('Error al buscar el Pokémon:', error);
+                    const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+                    errorModal.show();
+                });
+        }, 1000); 
     } else {
+        ocultarCarga();
         const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
         errorModal.show();
     }
 }
+

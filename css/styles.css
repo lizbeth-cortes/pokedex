@@ -282,7 +282,7 @@ p.titulo {
 
 p.descripcion {
     font-size: 24px;
-    line-height: 25px;
+    line-height: 28px;
     white-space: pre-line;
     max-width: 560px;
     margin: 0 auto;
@@ -343,7 +343,6 @@ div.info-texto>h2 {
     font-size: 16px;
     line-height: 18px;
     text-shadow: 2px 2px 5px rgba(146, 153, 168, 0.6);
-    /* Sombra del texto */
 }
 
 img.imagen {
@@ -369,25 +368,23 @@ img.imagen {
 }
 
 .tabla {
-    /* background-color: rgb(0, 126, 167); */
-    /* background-color: rgb(0, 52, 89); */
     color: var(--clr-white);
-    /* background-image: radial-gradient(circle, rgb(0, 126, 167) 39%, rgb(0 23 31/ 100%) 96%); */
     background-image: radial-gradient(circle, rgb(0, 126, 167) 30%, rgb(0 52 89/ 100%) 90%);
 }
 
 
-td.icono-texto iconify-icon {
-    /* font-size: 25px; */
-    margin-right: 10px;
-}
 
 
 
-.icono-texto {
+div.icono-texto {
     display: flex;
     align-items: center;
     padding: 5px 0px 5px 20px;
+    justify-content: start;
+    
+}
+div.icono-texto span{
+    margin-inline-start: 5px;
 }
 
 
@@ -397,7 +394,8 @@ td.icono-texto iconify-icon {
     border: #1c1c1c 1px solid;
     vertical-align: middle;
     /* padding:5px; */
-    margin: 3px;
+    /* margin: 3px; */
+    
 }
 
 table {
@@ -417,14 +415,19 @@ th {
 td,
 th {
     border-left: white solid 1px;
-    /* padding: 5px; */
 }
 
 td div {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: space-evenly;
 }
+
+td{
+    padding: 2px;
+}
+
 
 tr {
     border-top: #ffffff 1px solid;
@@ -445,9 +448,28 @@ tr:hover {
 /** Sección buscador por nombre o id */
 div.seccion-buscador h2 {
     text-align: center;
-    font-size: 35px;
+    font-size: 30px;
     margin: 0;
     padding-bottom: 20px;
+}
+
+.contenedor-buscador{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: stretch;
+    
+}
+
+div.buscador-contenido > h2 {
+    color: #00A7E1;
+    margin-bottom: 10px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.contenedor-buscador > .buscador{
+    padding: 30px 0;
 }
 
 .buscador {
@@ -458,16 +480,33 @@ div.seccion-buscador h2 {
     padding: 40px 0;
 }
 
+.buscador-contenido{
+    align-content: center;
+}
 
-.label {
+.contenedor-buscador .label {
     color: #00A7E1;
     margin: 0;
-    font-size: 20px;
+    font-size: 15px;
     text-align: justify;
 }
 
+.seccion-buscador p.label {
+    color: #00A7E1;
+    margin: 0;
+    font-size: 20px;
+    line-height: 26px;
+    text-align: center;
+}
 .info {
     color: var(--clr-white);
+}
+
+.contenedor-buscador .info {
+    color: var(--clr-white);
+    font-size:15px;
+    text-align: justify;
+    margin: 0;
 }
 
 form {
@@ -490,9 +529,26 @@ iconify-icon {
 
 /** Card **/
 
+div.contenedor-card, div.contenedor-tarjeta {
+    display: flex;
+}
+
 div.contenedor-cards {
     width: 100%;
     display: flex;
+}
+
+.contenedor-tarjeta .pokemon-todos {
+    margin-top: 0px;
+    display: inline-flex;
+    flex-wrap: wrap;
+    width: 100vw;
+
+}
+
+.contenedor-tarjeta .contenedor-card {
+    padding: 0;
+    padding-left: 20px;
 }
 
 .pokemon-todos {
@@ -516,7 +572,7 @@ div.card {
     /* margin-inline: 5px; */
     transition: transform 0.2s;
     border-radius: 20px;
-    align-content: center;
+    align-self: center;
     height: 100%;
 }
 
@@ -540,10 +596,11 @@ div.card-body {
 }
 
 
-.pokemon-nombre {
+h2.pokemon-nombre {
     text-transform: capitalize;
     color: var(--clr-white);
-    /* margin: 0; */
+    margin: 0;
+    padding-block:5px;
     font-size: 18px;
     font-family: "Krona One", sans-serif;
 
@@ -569,7 +626,7 @@ div.card-body {
 .tipo {
     margin: 0;
     text-transform: uppercase;
-    padding: .25px .5rem;
+    padding: 1px .5rem;
     border-radius: 100vmax;
     font-weight: 600;
 }
@@ -604,9 +661,24 @@ div.card-body {
 }
 
 /** MODAL **/
+
+.modal{
+    align-content: center;
+}
+
+div.modal-dialog{
+    margin: auto;
+}
+
 div.modal-header {
     padding: 10px 15px;
     font-size: 10px;
+    text-align: center;
+    justify-content: center;
+}
+
+div.modal-header button.btn-close{
+    padding: 15px;
 }
 
 .modal-title {
@@ -623,6 +695,7 @@ div.modal-body {
 div.modal-body p {
     margin: 0;
     text-align: justify;
+    padding-bottom: 10px;
 }
 
 div.modal-body div {
@@ -635,6 +708,37 @@ div.modal-body div button {
     background-color: #007EA7;
 }
 
+/** Spinner de carga **/
+
+
+.contenedor-spinner{
+    align-items: center;
+    justify-content: center;
+}
+
+.spinner-carga{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.contenedor-spinner strong{
+    font-size: 20px;
+    color: #46b5da;
+}
+
+.spinner-border{
+    display: flex;
+    justify-content: center;
+    color: #46b5da;
+}
+
+.seccion-buscador + .contenedor-spinner{
+    padding-block: 25px;
+}
+
+
 /** Detalles **/
 section.contenedor-botones{
     margin: 0;
@@ -642,8 +746,17 @@ section.contenedor-botones{
 
 /**  **/
 
-ul {
+div ul {
     list-style: none;
+}
+
+div.info-acciones ul{
+    list-style: square;
+    margin: 0;
+}
+
+div.info-acciones{
+    display:none;
 }
 
 /** Footer **/
@@ -661,6 +774,40 @@ footer{
         font-size: 20px;
     }
 
+    div.buscador-contenido > h2 {
+        margin-bottom: 10px;
+        font-size: 18px;
+    }
+    
+    form{
+        margin-block: 8px;
+        
+    }
+
+    .contenedor-buscador .label, .contenedor-buscador .info, .contenedor-buscador input.form-control {
+        font-size: 13px;
+        line-height: 17px;
+    }
+    
+    .contenedor-spinner strong{
+        font-size: 18px;
+    }
+    
+    .spinner-icono .spinner-border{
+        width: 25px;
+        height: 25px;
+    }
+
+}
+
+@media (max-width: 1070px) {
+    div.buscador-contenido > h2 {
+        font-size: 16px;
+    }
+    .contenedor-buscador .label, .contenedor-buscador .info, .contenedor-buscador input.form-control {
+        font-size: 12px;
+        line-height: 15px;
+    }
 }
 
 @media (max-width: 992px) {
@@ -677,6 +824,17 @@ footer{
         font-size: 20px;
         line-height: 23px;
     }
+
+    .contenedor-spinner strong{
+        font-size: 16px;
+    }
+    
+    .spinner-icono .spinner-border{
+        width: 20px;
+        height: 20px;
+    }
+
+
 
 }
 
@@ -734,8 +892,29 @@ footer{
         font-size:30px;
     }
 
-    div.info-texto > p{
+    div.info-texto > p,ul{
         font-size: 14px;
+    }
+
+    div.info-acciones{
+        display:block;
+    }
+
+    div.carousel-caption > p{
+        display: none;
+    }
+
+    th {
+        font-size: 13px;
+        /* padding: 5px 3px; */
+    }
+
+    td span{
+        font-size: 12px;
+    }
+
+    iconify-icon.icono-circulo{
+        padding: 3px;
     }
 
     .separador-seccion{
@@ -754,14 +933,36 @@ footer{
     input.form-control{
         font-size: 15px;
     }
-    p.label{
-        font-size:18px;
+    .seccion-buscador .buscador .buscador-contenido .label{
+        font-size:16px;
         line-height: 20px;
     }
 
     p.info{
         font-size:14px;
         margin: 0;
+    }
+
+    button.btn-header{
+        font-size: 11px;
+        padding: 4px 8px;
+    }
+    
+
+    div.modal-dialog{
+        max-width: 400px;
+    }
+
+    div.modal-header h5{
+        font-size: 16px;
+    }
+
+    div.modal-body p,  div.modal-body div button{
+        font-size: 14px;
+    }
+
+    div.modal-body div button{
+        padding: 3px 6px;
     }
 
 }
@@ -823,7 +1024,7 @@ footer{
         font-size: 20px;
     }
 
-    div.info-texto > p{
+    div.info-texto > p, ul{
         font-size: 12px;
     }
 
@@ -831,6 +1032,10 @@ footer{
 
     main {
         background-size: 40px 40px; 
+    }
+
+    p.texto{
+        margin-block-end: 10px;
     }
 
     div.carrusel{
@@ -846,9 +1051,12 @@ footer{
         margin-block:20px ;
     }
 
-    div.seccion-buscador h2{
-        font-size: 20px;
-        padding-bottom: 10px;
+    div.seccion-buscador h2, div.contenedor-buscador h2{
+        font-size: 18px;
+    }
+    .seccion-buscador .buscador .buscador-contenido .label{
+        font-size:13px;
+        line-height: 16px;
     }
 
     .buscador{
@@ -858,9 +1066,10 @@ footer{
     input.form-control{
         font-size: 12px;
     }
-    p.label{
-        font-size:16px;
-        line-height: 18px;
+
+    button.btn-header{
+        font-size: 9px;
+        padding: 3px 6px;
     }
 
     p.info{
@@ -869,13 +1078,18 @@ footer{
     }
 
     th {
-        font-size: 10px;
-        padding: 5px 3px;
+        font-size: 11px;
+        padding: 6px 3px;
     }
 
     div.icono-texto {
         padding: 0;
-        justify-content: center;
+        padding-inline-start: 3px;
+        /* justify-content: center; */
+    }
+
+    div.icono-texto span{
+        font-size: 10px;
     }
 
     iconify-icon.icono-circulo {
@@ -897,6 +1111,37 @@ footer{
 
     footer{
         height: 60px;
+    }
+    
+    
+
+    div.modal-dialog{
+        max-width: 300px;
+    }
+
+
+
+    div.modal-header h5{
+        font-size: 14px;
+    }
+
+    div.modal-body p,  div.modal-body div button{
+        font-size: 12px;
+    }
+
+    div.modal-body{
+        padding: 10px;
+    }
+}
+
+@media (max-width:575px) {
+    .contenedor-tarjeta .contenedor-card{
+        padding: 0;
+        padding-top: 20px;
+    }
+
+    .contenedor-buscador .contenedor-spinner{
+        padding-block: 15px;
     }
 }
 
@@ -930,6 +1175,50 @@ footer{
 
     .separador-seccion{
         margin-block:15px ;
+    }
+
+    
+
+    td{
+        padding: 2px;
+    }
+
+    iconify-icon.icono-circulo{
+        padding: 2px;
+        margin: 0;
+
+    }
+
+    button.btn-header{
+        padding: 2px 4px;
+        font-size: 8px;
+    }
+
+    .lista {
+        gap:4px;  
+    }
+
+    div.modal-dialog{
+        max-width: 250px;
+    }
+
+    div.modal-header{
+        font-size: 12px;
+    }
+
+
+
+    div.modal-body, div.modal-header{
+        padding: 8px 10px;
+    }
+
+    div.modal-body p,  div.modal-body div button{
+        font-size: 10px;
+        line-height: 13px;
+    }
+
+    div.modal-body div button{
+        padding: 3px 5px;
     }
 }
 

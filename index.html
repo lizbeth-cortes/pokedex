@@ -15,9 +15,9 @@
         <nav class="navbar navbar-expand-lg">
             <div class=" container-fluid menu">
                 <div class="icono">
-                        <div>
-                            <img src="/img/logo.png" class="image-fluid" alt="Bootstrap">
-                        </div>
+                    <div>
+                        <img src="/img/logo.png" class="image-fluid" alt="Bootstrap">
+                    </div>
                     <p class="logo-texto"> PokéDex</p>
                 </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -66,8 +66,15 @@
                             en
                             tu
                             conocimiento y amor por estos increíbles seres.</p>
-                        <p class="texto" style="margin: 0;">En la esta PokéDex, podrás:</p>
-
+                        <p class="texto">En la esta PokéDex, podrás:</p>
+                        <div class="info-acciones">
+                            <ul>
+                                <li>Buscar el pokemon de tu preferencia usando el nombre o número de la
+                                    pokedéx nacional.</li>
+                                <li>Explorar los diferentes tipos de Pokémon.</li>
+                                <li>Explorar los diferentes tipos de Pokémon.</li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="carrusel">
                         <div id="carouselExampleCaptions" class="carousel slide">
@@ -83,7 +90,6 @@
                                 <div class="carousel-item active">
                                     <img src="/img/portada1.png" class="imagen" alt="...">
                                     <div class="carousel-caption d-none d-md-block">
-                                        <!-- <h5>First slide label</h5> -->
                                         <p>Buscar el pokemon de tu preferencia usando el nombre o número de la
                                             pokedéx nacional.</p>
 
@@ -124,10 +130,11 @@
 
                 <div class="separador-seccion"></div>
 
-                <div class="seccion-buscador">
-                    <h2>Buscador de Pokémon</h2>
-                    <div class="buscador">
-                        <div class="buscador-contenido col-9">
+
+                <div class="contenedor-buscador">
+                    <div class="buscador col-12 col-sm-6 col-md-5 col-lg-4">
+                        <div class="buscador-contenido col-8">
+                            <h2>Buscador de Pokémon</h2>
                             <p class="label">Nombre o número: </p>
                             <form class="d-flex input-group" role="search" onsubmit="return false;">
                                 <input class="form-control" type="search" placeholder="Buscar" aria-label="Search"
@@ -142,40 +149,43 @@
                         </div>
 
                     </div>
-                </div>
-
-                <div class="contenedor-cards" id="todos">
-                    <div class="pokemon-todos" id="listaPokemon">
-
+                    <div class="contenedor-spinner" id="contenedor-spinner">
+                        <div class="spinner-carga" id="spinner-carga">
+                            <div class="spinner-icono">
+                                <div class="spinner-border ms-auto" aria-hidden="true"></div>
+                            </div>
+                            <strong role="status">Buscando...</strong>
+                        </div>
                     </div>
-
+                    <div class="contenedor-tarjeta col-12 col-sm-6 col-md-5 col-lg-4" id="todos">
+                        <div class="pokemon-todos" id="listaPokemon">
+                        </div>
+                    </div>
                 </div>
-
             </div>
         </section>
-
     </main>
 
     <!-- Modal de Error -->
-<div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="errorModalLabel">Error en la búsqueda</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" id="errorModalBody">
-                <p>
-                    Por favor, ingrese el nombre o ID de un Pokémon
-                </p>
-                <div>
-                    <button type="button" class="btn btn-primary " data-bs-dismiss="modal">Aceptar</button>
+    <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="errorModalLabel">Error en la búsqueda</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                
+                <div class="modal-body" id="errorModalBody">
+                    <p>
+                        Por favor, ingrese el nombre o ID de un Pokémon
+                    </p>
+                    <div>
+                        <button type="button" class="btn btn-primary " data-bs-dismiss="modal">Aceptar</button>
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
-</div>
     <footer>
 
     </footer>
